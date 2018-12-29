@@ -38,6 +38,12 @@ public class Main {
         locations.get(5).addExit("W",2);
 //        locations.get(5).addExit("Q",0);
 
+        Map<String, String> vocab = new HashMap<String, String>();
+        vocab.put("QUIT","Q");
+        vocab.put("SOUTH","S");
+        vocab.put("NORTH","N");
+        vocab.put("EAST","E");
+        vocab.put("WEST","W");
 
         int loc = 1;
         while(true){
@@ -54,6 +60,15 @@ public class Main {
             System.out.println();
 
             String direction = scanner.nextLine().toUpperCase();
+            if(direction.length() > 1){
+                String[] words = direction.split(" ");
+                for(String word: words){
+                    if(vocab.containsKey(word)){
+                        direction = vocab.get(word);
+                        break;
+                    }
+                }
+            }
             if(exits.containsKey(direction)){
                 loc = exits.get(direction);
             }else{
